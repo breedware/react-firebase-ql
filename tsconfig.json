@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+      "target": "ES2019",
+      "module": "ESNext",
+      "declaration": true,
+      "declarationDir": "dist",
+      "forceConsistentCasingInFileNames": true,
+      "outDir": "dist",
+      "jsx": "react-jsx",
+      "moduleResolution": "Node",
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "sourceMap": true,
+      "strict": true,
+      "resolveJsonModule": true,
+      "lib": ["DOM", "ES2019"]
+    },
+    "include": ["src"]
+  }
+  
