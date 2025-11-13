@@ -93,22 +93,22 @@ export enum FIREBASETABLE {
     ---
 }
 ```
-## Sample Usage
+## Creating Models
 
 Organize your models in a dedicated folder
 src/ or app/ - for nextjs developers
 
+```css
 src/
-
 └── models/
-
-    ├── Users.model.ts
-
+  ├── Users.model.ts
     ├── Posts.model.ts
-
     └── ...other models
-
 ```
+
+## Example: Users Model
+
+```ts
 // src/models/Users.model.ts
 import { firestoreDB } from "../firebase.config";
 import { FIREBASETABLE } from "../firebase.config";
@@ -119,6 +119,7 @@ export interface YourFirestoreDocumentStructure {
     firstName: string;
     ---
 }
+
 export class UsersModel extends BaseModel {
 
     data: YourFirestoreDocumentStructure | YourFirestoreDocumentStructure[] | undefined;
@@ -136,10 +137,10 @@ export class UsersModel extends BaseModel {
 }
 
 ```
+## Using Hooks
+Fetch a single user record by reference
 
-Fetch a user record
-
-```
+```ts
 import { useFetch } from "react-firebase-ql";
 import { UsersModel } from "../models/Users.model";
 
@@ -161,7 +162,6 @@ export default function UserProfile() {
 
 ```
 
-Breedware Limited
 ## Authors
 
 - [@breedware](https://www.github.com/breedware)
