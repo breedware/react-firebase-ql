@@ -558,3 +558,4 @@ export class BaseModel implements Model {
     }
 
 }
+// npx tsup src/index.ts --dts --format esm,cjs --out-dir dist

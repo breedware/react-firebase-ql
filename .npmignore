@@ -1,0 +1,11 @@
+# Exclude unnecessary dev files
+node_modules
+dist
+rollup.config.js
+vitest.config.ts
+eslint.config.js
+package-lock.json
+tsconfig.json
+
+# Keep source files for building
+# DO NOT exclude src here
