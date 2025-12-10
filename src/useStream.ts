@@ -1,9 +1,8 @@
 'use client';
 
+import { BaseModel, errorLogger, whereClause } from 'firebase-client-ql';
 import { useEffect } from 'react';
-import { BaseModel } from './BaseModel';
-import { whereClause } from './constants';
-import { errorLogger } from './helpers';
+
 
 export const useStream = <T extends BaseModel>(
   param: {
