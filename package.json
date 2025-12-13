@@ -1,6 +1,6 @@
 {
   "name": "react-firebase-ql",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "A React helper library that simplifies using Firebase with side effects and live queries.",
   "main": "dist/index.js",
   "module": "esm/index.js",
@@ -19,8 +19,8 @@
   "scripts": {
     "clean": "rimraf dist esm",
     "prebuild": "npm run clean",
-    "build:cjs": "tsc --module commonjs --outDir dist",
-    "build:esm": "tsc --module esnext --outDir esm",
+    "build:cjs": "tsc --module commonjs --declaration --outDir dist",
+    "build:esm": "tsc --module esnext --declaration --outDir esm",
     "build": "npm run build:esm && npm run build:cjs",
     "prepublishOnly": "npm run build",
     "prepare": "npm run build",
@@ -45,8 +45,14 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "import": "./esm/index.js",
-      "require": "./dist/index.js",
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./esm/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
       "default": "./esm/index.js"
     }
   }
