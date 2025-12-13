@@ -16,6 +16,7 @@ export const useStream = <T extends BaseModel>(
   },
   callback: (data: any) => void
 ): void => {
+
   useEffect(() => {
     let unsubscribe: (() => void) | undefined;
 
@@ -27,12 +28,13 @@ export const useStream = <T extends BaseModel>(
           if (data) callback(data);
         }, reference);
       } else if (where) {
-        const allInvalid = where.every((item) => item.value === undefined);
-        if (allInvalid) {
-          callback([]);
-          return;
+        if (where.length > 0) {
+            const allInvalid = where.every((item) => item.value === undefined);
+            if (allInvalid) {
+              callback([]);
+              return;
+            }
         }
-
         unsubscribe = model.streamWhere(
           where,
           (data: any) => {
