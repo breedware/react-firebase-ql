@@ -10,10 +10,9 @@ import {
 } from 'react';
 
 import { Auth, User, onAuthStateChanged } from 'firebase/auth';
-import { errorLogger } from 'firebase-client-ql';
 
 enum AUTHACTIONTYPE {
-    SETFBUSER = "SETFBUSER",
+    SETUID = "SETFBUSER",
 }
 
 /**
@@ -21,12 +20,12 @@ enum AUTHACTIONTYPE {
  * all components
  */
 interface AUTHSTATE {
-    FBUser?: User
+    UID?: string
 }
 
 interface AUTHACTION {
     type: AUTHACTIONTYPE,
-    payload: User | undefined
+    payload: string | undefined
 }
 
 
@@ -34,16 +33,16 @@ const initialAUTHState: AUTHSTATE = {}
 
 const AUTHReducer = (state: AUTHSTATE, action: AUTHACTION): AUTHSTATE => {
   switch (action.type) {
-    case AUTHACTIONTYPE.SETFBUSER: {
+    case AUTHACTIONTYPE.SETUID: {
       const nextUser = action.payload;
 
-      if (state.FBUser?.uid === nextUser?.uid) {
+      if (state.UID === nextUser) {
         return state;
       }
 
       return {
         ...state,
-        FBUser: nextUser,
+        UID: nextUser,
       };
     }
 
@@ -75,10 +74,10 @@ export const AUTHProvider = ({ children, auth }: AUTHProviderProps) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
-      
+
       dispatch({
-          type: AUTHACTIONTYPE.SETFBUSER,
-          payload: authUser ?? undefined,
+          type: AUTHACTIONTYPE.SETUID,
+          payload: authUser?.uid ?? undefined,
         });
       });
 
