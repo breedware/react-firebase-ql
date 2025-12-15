@@ -86,7 +86,7 @@ export const AUTHProvider = ({ children, auth }: AUTHProviderProps) => {
             type: AUTHACTIONTYPE.SETFBUSER,
             payload: authUser ?? undefined,
           });
-          
+
         } catch (error) {
           errorLogger('User Authentication error:', error);
         }
@@ -94,7 +94,7 @@ export const AUTHProvider = ({ children, auth }: AUTHProviderProps) => {
     );
 
     return unsubscribe;
-  }, [auth]);
+  }, []);
 
   return (
     <AUTHContext.Provider value={AUTHState}>
