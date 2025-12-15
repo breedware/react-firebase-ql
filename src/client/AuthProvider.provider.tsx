@@ -74,24 +74,13 @@ export const AUTHProvider = ({ children, auth }: AUTHProviderProps) => {
   );
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(
-      auth,
-      (authUser: User | null) => {
-        try {
-          if(AUTHState.FBUser?.uid===authUser?.uid){
-            return;
-          }
-
-          dispatch({
-            type: AUTHACTIONTYPE.SETFBUSER,
-            payload: authUser ?? undefined,
-          });
-
-        } catch (error) {
-          errorLogger('User Authentication error:', error);
-        }
-      }
-    );
+    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+      
+      dispatch({
+          type: AUTHACTIONTYPE.SETFBUSER,
+          payload: authUser ?? undefined,
+        });
+      });
 
     return unsubscribe;
   }, []);
