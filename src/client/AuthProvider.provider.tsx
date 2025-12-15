@@ -33,18 +33,25 @@ interface AUTHACTION {
 const initialAUTHState: AUTHSTATE = {}
 
 const AUTHReducer = (state: AUTHSTATE, action: AUTHACTION): AUTHSTATE => {
+  switch (action.type) {
+    case AUTHACTIONTYPE.SETFBUSER: {
+      const nextUser = action.payload;
 
-    const {type, payload} = action
+      if (state.FBUser?.uid === nextUser?.uid) {
+        return state;
+      }
 
-    switch (type) {
-       
-        case 'SETFBUSER':
-            return {...state, FBUser: payload as User }
-        
-        default:
-            return state
+      return {
+        ...state,
+        FBUser: nextUser,
+      };
     }
-}
+
+    default:
+      return state;
+  }
+};
+
 
 
 const initialDispatch: Dispatch<AUTHACTION> = () => {};
