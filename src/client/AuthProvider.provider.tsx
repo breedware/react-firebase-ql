@@ -78,10 +78,15 @@ export const AUTHProvider = ({ children, auth }: AUTHProviderProps) => {
       auth,
       (authUser: User | null) => {
         try {
+          if(AUTHState.FBUser?.uid===authUser?.uid){
+            return;
+          }
+
           dispatch({
             type: AUTHACTIONTYPE.SETFBUSER,
             payload: authUser ?? undefined,
           });
+          
         } catch (error) {
           errorLogger('User Authentication error:', error);
         }
