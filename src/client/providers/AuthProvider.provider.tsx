@@ -1,0 +1,94 @@
+'use client';
+
+import {
+  Dispatch,
+  ReactNode,
+  useReducer,
+  Context,
+  createContext,
+  useEffect,
+} from 'react';
+
+import { Auth, User, onAuthStateChanged } from 'firebase/auth';
+import { errorLogger } from 'firebase-client-ql';
+
+enum AUTHACTIONTYPE {
+    SETFBUSER = "SETFBUSER",
+}
+
+/**
+ * AUTH state maintained accross
+ * all components
+ */
+interface AUTHSTATE {
+    FBUser?: User
+}
+
+interface AUTHACTION {
+    type: AUTHACTIONTYPE,
+    payload: User | undefined
+}
+
+
+const initialAUTHState: AUTHSTATE = {}
+
+const AUTHReducer = (state: AUTHSTATE, action: AUTHACTION): AUTHSTATE => {
+
+    const {type, payload} = action
+
+    switch (type) {
+       
+        case 'SETFBUSER':
+            return {...state, FBUser: payload as User }
+        
+        default:
+            return state
+    }
+}
+
+
+const initialDispatch: Dispatch<AUTHACTION> = () => {};
+
+export const AUTHContext: Context<AUTHSTATE> =
+  createContext(initialAUTHState);
+
+const AUTHDispatch: Context<Dispatch<AUTHACTION>> =
+  createContext(initialDispatch);
+
+type AUTHProviderProps = {
+  children: ReactNode;
+  auth: Auth;
+};
+
+export const AUTHProvider = ({ children, auth }: AUTHProviderProps) => {
+  const [AUTHState, dispatch] = useReducer(
+    AUTHReducer,
+    initialAUTHState
+  );
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (authUser: User | null) => {
+        try {
+          dispatch({
+            type: AUTHACTIONTYPE.SETFBUSER,
+            payload: authUser ?? undefined,
+          });
+        } catch (error) {
+          errorLogger('User Authentication error:', error);
+        }
+      }
+    );
+
+    return unsubscribe;
+  }, [auth]);
+
+  return (
+    <AUTHContext.Provider value={AUTHState}>
+      <AUTHDispatch.Provider value={dispatch}>
+        {children}
+      </AUTHDispatch.Provider>
+    </AUTHContext.Provider>
+  );
+};
