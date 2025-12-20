@@ -83,7 +83,7 @@ export const AUTHProvider = ({ children, auth }: AUTHProviderProps) => {
         });
       });
 
-    return unsubscribe;
+    return () => unsubscribe();
   }, []);
 
   return (
