@@ -1,6 +1,6 @@
 {
   "name": "react-firebase-ql",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "A React helper library that simplifies using Firebase with side effects and live queries.",
   "main": "dist/index.js",
   "module": "esm/index.js",

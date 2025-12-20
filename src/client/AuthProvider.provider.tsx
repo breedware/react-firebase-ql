@@ -9,7 +9,7 @@ import {
   useEffect,
 } from 'react';
 
-import { Auth, User, onAuthStateChanged } from 'firebase/auth';
+import { Auth, onAuthStateChanged } from 'firebase/auth';
 
 enum AUTHACTIONTYPE {
     SETUID = "SETFBUSER",
