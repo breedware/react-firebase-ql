@@ -75,9 +75,11 @@ export const AUTHProvider = ({ children, auth }: AUTHProviderProps) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
 
+      if(!authUser) return;
+
       dispatch({
           type: AUTHACTIONTYPE.SETUID,
-          payload: authUser?.uid ?? undefined,
+          payload: authUser.uid ?? undefined,
         });
       });
 
