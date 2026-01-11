@@ -20,7 +20,7 @@ export const useStream = <T extends BaseModel>(
     };
   }
 ): UseStreamResult<T> => {
-  const [data, setData] = useState<T[]>([]);
+  const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>(null);
 
@@ -32,8 +32,8 @@ export const useStream = <T extends BaseModel>(
       const { model, reference, where, filter } = param;
 
       if (reference) {
-        unsubscribe = model.stream((result: T[]) => {
-          setData(result ?? []);
+        unsubscribe = model.stream((result: T) => {
+          setData(result);
           setLoading(false);
         }, reference);
       } 
