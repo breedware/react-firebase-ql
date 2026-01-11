@@ -3,8 +3,8 @@
 import { BaseModel, errorLogger, whereClause } from 'firebase-client-ql';
 import { useEffect, useState } from 'react';
 
-type UseStreamResult<T> = {
-  data: T[];
+type UseStreamResult = {
+  data: any;
   loading: boolean;
   error: unknown;
 };
@@ -19,8 +19,8 @@ export const useStream = <T extends BaseModel>(
       offset?: string;
     };
   }
-): UseStreamResult<T> => {
-  const [data, setData] = useState<any>([]);
+): UseStreamResult => {
+  const [data, setData] = useState<any>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>(null);
 
@@ -46,7 +46,7 @@ export const useStream = <T extends BaseModel>(
 
         unsubscribe = model.streamWhere(
           where,
-          (result: T[]) => {
+          (result: any[]) => {
             setData(result ?? []);
             setLoading(false);
           },
