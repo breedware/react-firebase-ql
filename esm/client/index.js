@@ -4,4 +4,5 @@ export { useFetch } from '../client/useFetch';
 export { useStream } from '../client/useStream';
 export { AUTHProvider, AUTHContext } from '../client/AuthProvider.provider';
 export { useCountdown } from '../client/useCountdown.hooks';
+export { initFirebaseClient } from './utility/firebase.config';
 //# sourceMappingURL=index.js.map
