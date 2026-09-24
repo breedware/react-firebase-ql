@@ -1,6 +1,6 @@
 {
   "name": "react-firebase-ql",
-  "version": "4.3.1",
+  "version": "5.0.0",
   "description": "A React helper library that simplifies using Firebase with side effects and live queries.",
   "main": "dist/index.js",
   "module": "esm/index.js",
@@ -31,7 +31,7 @@
   },
   "peerDependencies": {
     "react": ">=18",
-    "firebase-client-ql": ">=4"
+    "firebase-client-ql": ">=11"
   },
   "devDependencies": {
     "@testing-library/react": "^16.3.0",

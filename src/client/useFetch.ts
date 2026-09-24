@@ -4,7 +4,7 @@ import { BaseModel, errorLogger, whereClause } from "firebase-client-ql"
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react"
 
 
-// 👇 Hook is now generic
+// Hook is now generic
 export const useFetch = <T extends BaseModel >(param: {
     model: T | any
     where?: whereClause[],
