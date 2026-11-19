@@ -18,6 +18,7 @@ export const useStream = <T extends BaseModel>(
       orderBy?: { parameter: string; direction?: 'asc' | 'desc' };
       offset?: string;
     };
+    limit?: number;
   }
 ): UseStreamResult => {
   const [data, setData] = useState<any>();
@@ -50,7 +51,7 @@ export const useStream = <T extends BaseModel>(
             setData(result ?? []);
             setLoading(false);
           },
-          100,
+          param.limit ?? 50,
           filter?.orderBy,
           filter?.offset
         );

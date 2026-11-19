@@ -6,6 +6,7 @@ export const useStream = (param) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     useEffect(() => {
+        var _a;
         let unsubscribe;
         setLoading(true);
         try {
@@ -25,7 +26,7 @@ export const useStream = (param) => {
                 unsubscribe = model.streamWhere(where, (result) => {
                     setData(result !== null && result !== void 0 ? result : []);
                     setLoading(false);
-                }, 100, filter === null || filter === void 0 ? void 0 : filter.orderBy, filter === null || filter === void 0 ? void 0 : filter.offset);
+                }, (_a = param.limit) !== null && _a !== void 0 ? _a : 50, filter === null || filter === void 0 ? void 0 : filter.orderBy, filter === null || filter === void 0 ? void 0 : filter.offset);
             }
         }
         catch (err) {
